@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <script src="scripts.js"></script>
+</head>
+
+
+
+
+<body>
+
+    <div>
+        <h1>Shonen Showdown</h1>
+
+        <label>Number of Character to Roll:</label>
+        <input type="number" id="rollCount" name="Roll Count" min="1" max="10" value="1" step="1">
+
+        <button onclick="rollCharacter()">Roll Character</button>
+        <button onclick="resetTeams()">Reset</button>
+
+        <div id="currentCharacter">
+            <div id="character1">
+                <h3></h3>
+                <img src="">
+            </div>
+            <div id="character2">
+                <h3></h3>
+                <img src="">
+            </div>
+            <div id="character3">
+                <h3></h3>
+                <img src="">
+            </div>
+        </div>
+
+        <div>
+            <h2><input type="text" placeholder="Player 1 Name" id="player1"></h2>
+            <ul id="team1List">
+                <li><button onclick="setPosition('Captain',1)">Captain</button>:<img src=""></li>
+                <li><button onclick="setPosition('Vice-Captain',1)">Vice-Captain</button>:<img src=""></li>
+                <li><button onclick="setPosition('Tank',1)">Tank</button>:<img src=""></li>
+                <li><button onclick="setPosition('Healer',1)">Healer</button>:<img src=""></li>
+                <li><button onclick="setPosition('Support1',1)">Support</button>:<img src=""></li>
+                <li><button onclick="setPosition('Support2',1)">Support</button>:<img src=""></li>
+            </ul>
+        </div>
+         <div>
+            <h2><input type="text" placeholder="Player 2 Name" id="player2"></h2>
+            <ul id="team1List">
+                <li><button onclick="setPosition('Captain',2)">Captain</button>:<img src=""></li>
+                <li><button onclick="setPosition('Vice-Captain',2)">Vice-Captain</button>:<img src=""></li>
+                <li><button onclick="setPosition('Tank',2)">Tank</button>:<img src=""></li>
+                <li><button onclick="setPosition('Healer',2)">Healer</button>:<img src=""></li>
+                <li><button onclick="setPosition('Support1',2)">Support</button><img src=""></li>
+                <li><button onclick="setPosition('Support2',2)">Support</button>:<img src=""></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+
+
+
+
+
+</html>

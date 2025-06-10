@@ -26,47 +26,19 @@ let team2 = {
     ["Support"]:"",
     ["Support"]:"",
 };
-
+let characterList = [];
 async function populate() {
   const requestURL =
-    "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
+    "https://raw.githubusercontent.com/ShadowLeaderJordanzo/ShonenShowdown/refs/heads/main/characters.json?token=GHSAT0AAAAAACUEPPBAC6VI7CDXHDRWPW742CHNYLA";
   const request = new Request(requestURL);
 
   const response = await fetch(request);
   const s = await response.json();
-
-  console.log(s)
+    console.log(s)
+    characterList=s
 }
 
-let characterList = JSON.parse("character.json")
-async function fetchCharacters() {
-    try {
-        
-        // const response = await fetch("https://onepiece.fandom.com/api.php?action=query&list=categorymembers&cmtitle=Category:Canon_Characters&cmlimit=500&format=json")
-        // const data = await response.json()
-        // characterList = data.query.categorymembers.filter(p => p.ns === 0);
-        fetch("https://onepiece.fandom.com/api.php?action=parse&page=List_of_Canon_Characters&format=json&origin=*")
-            .then(response => response.json())
-            .then(data => {
-                const html = data.parse.text["*"];
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-
-                const links = [...doc.querySelectorAll("a")].filter(a =>
-                    a.href.includes("/wiki/") &&
-                    !a.href.includes("redLink") &&
-                    !a.href.includes("List_of_") &&
-                    !a.href.includes("Category:")
-                );
-                const characters = [...new Set(links.map(a => a.textContent.trim()))]; 
-                console.log(characters);
-            });
-        console.log(characterList)
-    } catch(error) {
-        console.error("Oh no!", error)
-    }
-}
-fetchCharacters()
+populate();
 
 
 function rollCharacter() {

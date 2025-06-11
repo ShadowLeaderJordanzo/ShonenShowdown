@@ -59,7 +59,7 @@ function resetTeams() {
         if (Object.prototype.hasOwnProperty.call(team1, key)) {
             const element = team1[key];
             let ele = document.getElementById(`${key}1`)
-            if(ele && element) {
+            if(ele) {
                 ele.innerHTML = `
                     <li>
                         <center>
@@ -81,7 +81,7 @@ function resetTeams() {
         if (Object.prototype.hasOwnProperty.call(team2, key)) {
             const element = team2[key];
             let ele = document.getElementById(`${key}2`)
-            if(ele && element) {
+            if(ele) {
                 ele.innerHTML = `
                     <li>
                         <center>

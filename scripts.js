@@ -26,6 +26,15 @@ let team2 = {
     ["Support1"]:false,
     ["Support2"]:false,
 };
+
+let team1tracker = []
+let team2tracker = []
+
+let pickedCharacter = 0
+let lastTeamLength = 0
+
+
+
 let currentTeam = 0
 async function populate() {
     const requestURL =
@@ -55,6 +64,9 @@ function resetTeams() {
     };
     currentCharacter = null;
     currentTeam = 0;
+    lastTeamLength = 0;
+    team1tracker = [];
+    team2tracker = [];
     for (const key in team1) {
         if (Object.prototype.hasOwnProperty.call(team1, key)) {
             const element = team1[key];
@@ -115,7 +127,10 @@ async function getImage(title) {
             for (const pageId in pages) {
                 const page = pages[pageId];
                 if (page.thumbnail && page.thumbnail.source) {
-                    return page.thumbnail.source;
+                    let start = page.thumbnail.source.indexOf("/revision")
+                    let newLink = page.thumbnail.source.slice(0, start)
+                    
+                    return newLink;
                 }
             }
 
@@ -133,10 +148,22 @@ async function rollCharacter(doNotSwap) {
     let chars = []
     let index = 1
     let rolls = document.getElementById('rollCount').value
+
     if(currentTeam == 0) {
         currentTeam = 1
         doNotSwap = true
+    } else if(!doNotSwap) {
+        if(currentTeam == 1) {
+            if(lastTeamLength==team1tracker.length) return;
+        } else {
+            if(lastTeamLength==team2tracker.length) return;
+        }
     }
+
+
+
+
+
     Array.from(document.getElementById("currentCharacter").children).forEach(element => {
         if(index > rolls) {
             element.remove()
@@ -183,6 +210,11 @@ async function rollCharacter(doNotSwap) {
         div.style.backgroundColor = "white";
         currentTeam = currentTeam === 1 ? 2 : 1;
     }
+    if (currentTeam == 1) {
+        lastTeamLength = team1tracker.length
+    } else {
+        lastTeamLength = team2tracker.length
+    }
     document.getElementById(`player${currentTeam}`).style.backgroundColor = "yellow";
 }
 
@@ -206,11 +238,13 @@ function assignToTeam(position, teamNumber) {
     if(teamNumber == 1) {
         if(team1[position] != false) return;
         team1[position] = currentCharacter;
+        team1tracker.push(currentCharacter)
         updateTeamDisplay(1);
 
     } else {
         if(team2[position] != false) return;
         team2[position] = currentCharacter;
+        team2tracker.push(currentCharacter)
         updateTeamDisplay(2);
     }
     currentCharacter = null;
